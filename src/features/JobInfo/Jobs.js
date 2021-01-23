@@ -23,10 +23,10 @@ export function Jobs() {
 
   const jobsObjToJSX = jobs.map(job => {
       return (
-        <div _id = {job._id} className = {rectangleClass + "bg-gray-800"}>
+        <div key = {job._id} className = {rectangleClass + "bg-gray-800"}>
                     
             <div className = "float-right">
-                <GrClose className = "m-3 bg-gray-100"/>
+                <GrClose onClick = {() => dispatch(deletePost({id: job._id}))} className = "m-3 bg-gray-100"/>
             </div>
             <div className = {"h-48 bg-white" + center +  "pt-4"}>
                 <div className = "text-center p-4 text-3xl">

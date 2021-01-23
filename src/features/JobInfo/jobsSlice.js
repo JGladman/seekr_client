@@ -16,7 +16,7 @@ export const jobsSlice = createSlice({
   },
   reducers: {
     deletePost: (state, action) => {
-      state.jobs.filter(job => job.id !== action.id);
+      state.jobs = state.jobs.filter(job => job._id !== action.payload.id);
     },
     
 
