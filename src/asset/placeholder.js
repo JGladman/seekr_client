@@ -9,10 +9,10 @@ for (let i = 0; i < 100; i++){
         "jobTitle": "Job Title",
         "category": "Category",
         "applicationStep": 4,
-        "priority": -1,
+        "priority": 5,
         "notes": "Consectetur laborum aliqua esse duis non labore mollit nostrud voluptate voluptate. Ullamco est tempor reprehenderit do nisi magna irure esse excepteur cillum. Commodo voluptate non ad eu nulla et occaecat aute anim veniam et consectetur reprehenderit consectetur.",
-        "dateApplied": "MM DD YY",
-        "interviewDate": "MM DD YY"
+        "dateApplied": "MM-DD-YYYY",
+        "interviewDate": "MM-DD-YYYY"
     })
 }
 
