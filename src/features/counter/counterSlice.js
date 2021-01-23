@@ -1,17 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const counterSlice = createSlice({
+ const counterSlice = createSlice({
   name: 'counter',
   initialState: {
     value: 0,
   },
   reducers: {
-    increment: state => {
+    increment: (state,action) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.value += 1;
+      state.value += action.payload.id;
     },
     decrement: state => {
       state.value -= 1;
@@ -22,7 +22,10 @@ export const counterSlice = createSlice({
   },
 });
 
+
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+
+
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -40,3 +43,4 @@ export const incrementAsync = amount => dispatch => {
 export const selectCount = state => state.counter.value;
 
 export default counterSlice.reducer;
+
