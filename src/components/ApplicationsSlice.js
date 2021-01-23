@@ -7,7 +7,6 @@ import axios from 'axios';
 
 const initialState = {
   applications: [],
-  uniqueIds: [],
   status: 'idle',
   error: null,
 };
