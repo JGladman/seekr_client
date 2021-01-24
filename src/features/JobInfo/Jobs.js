@@ -6,6 +6,8 @@ import {
 import {GrClose} from "react-icons/gr"
 import Detail from "../../components/detail"
 import ClickAwayListener from "react-click-away-listener";
+import {AiOutlineSortAscending} from "react-icons/ai";
+import {IoMdAddCircle} from "react-icons/io"
 
 export function Jobs() {
     const [detail, setDetail] = useState(<div></div>);
@@ -105,6 +107,11 @@ export function Jobs() {
            
                 {showingDetails? detail: <div></div>}
             </ClickAwayListener>
+        </div>
+        <div className = "sticky" style = {{top: "100px", bottom: "0px", right: "10px"}} >
+            <AiOutlineSortAscending className = "sticky" style = {{top: "100px", bottom: "0px",left: 
+            "2px", right: "10px"}} />
+            <IoMdAddCircle />
         </div>
     </div>
   );
