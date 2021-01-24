@@ -24,17 +24,17 @@ export const CreateApplicationForm = () => {
     Boolean(priority) &&
     reqStatus === 'idle';
 
-  const onSaveApplicationClicked = async () => {
+  const onSaveApplicationClicked = () => {
     if (canSave) {
       setReqStatus('pending');
-      await dispatch(
+      dispatch(
         createApplication({ companyName, jobTitle, category, priority }),
       );
       setCompanyName('');
       setJobTitle('');
       setCategory('');
       setPriority('');
-      setReqStatus('');
+      setReqStatus('idle');
     }
   };
 

@@ -44,7 +44,7 @@ export const fetchApplications = createAsyncThunk(
       // Unsorted
       default:
         response = await axios.get('http://138.197.109.106:3001/applications');
-        return response.data;
+        return response.data.reverse();
     }
   },
 );
@@ -76,18 +76,9 @@ const applicationsSlice = createSlice({
       state.status = 'failed';
       state.error = action.error.message;
     },
-
-    [createApplication.pending]: (state, action) => {
-      state.status = 'loading';
-    },
-    [createApplication.fulfilled]: (state, action) => {
-      state.status = 'succeeded';
-      state.applications.push(action.payload);
-    },
-    [fetchApplications.rejected]: (state, action) => {
-      state.status = 'failed';
-      state.error = action.error.message;
-    },
+    // [createApplication.fulfilled]: (state, action) => {
+    //   state.applications = state.applications.concat(action.payload);
+    // },
   },
 });
 
