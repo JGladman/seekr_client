@@ -49,6 +49,17 @@ export const fetchApplications = createAsyncThunk(
   },
 );
 
+export const createApplication = createAsyncThunk(
+  'posts/createNewApplication',
+  async (newApplication) => {
+    const response = await axios.post(
+      'http://138.197.109.106:3001/applications',
+      { ...newApplication },
+    );
+    return response.post;
+  },
+);
+
 const applicationsSlice = createSlice({
   name: 'applications',
   initialState,
@@ -60,6 +71,18 @@ const applicationsSlice = createSlice({
     [fetchApplications.fulfilled]: (state, action) => {
       state.status = 'succeeded';
       state.applications = action.payload;
+    },
+    [fetchApplications.rejected]: (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message;
+    },
+
+    [createApplication.pending]: (state, action) => {
+      state.status = 'loading';
+    },
+    [createApplication.fulfilled]: (state, action) => {
+      state.status = 'succeeded';
+      state.applications.push(action.payload);
     },
     [fetchApplications.rejected]: (state, action) => {
       state.status = 'failed';
