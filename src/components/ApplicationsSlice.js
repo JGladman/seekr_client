@@ -76,6 +76,7 @@ const applicationsSlice = createSlice({
       state.status = 'failed';
       state.error = action.error.message;
     },
+
     [createApplication.pending]: (state, action) => {
       state.status = 'loading';
     },
