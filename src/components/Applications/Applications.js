@@ -97,7 +97,7 @@ export function Applications() {
   if (detailDisplayed) {
     return (
       <div>
-        <div className="h-24 border-b-2">Header</div>
+        {/* <div className="h-24 border-b-2">Header</div> */}
         <div className="mx-16 my-12 ">
           <ClickAwayListener
             onClickAway={() => {
@@ -117,7 +117,7 @@ export function Applications() {
   } else {
     return (
       <div>
-        <div className="h-24 border-b-2">Header</div>
+        {/* <div className="h-24 border-b-2">Header</div> */}
         <div className="mx-16 my-12 ">
           <ClickAwayListener
             onClickAway={() => {

@@ -6,11 +6,11 @@ import '../../stylesheets/detail.css';
 const Detail = (props) => {
   const [edittingActivated, setEdittingActivated] = useState(false);
   const [coloredStars, setColoredStars] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
+    props.application.priority >= 1,
+    props.application.priority >= 2,
+    props.application.priority >= 3,
+    props.application.priority >= 4,
+    props.application.priority >= 5,
   ]);
 
   const colorStars = (selectedIndex) => {
@@ -22,7 +22,7 @@ const Detail = (props) => {
     for (let j = 0; j <= selectedIndex; j++) {
       newColoredStars[j] = true;
     }
-    props.application.priority = selectedIndex + 1;
+    //props.application.priority = selectedIndex + 1;
     setColoredStars(newColoredStars);
   };
 
@@ -43,7 +43,7 @@ const Detail = (props) => {
         <input
           className="text-gray-600"
           type="text"
-          placeholder="categroy"
+          placeholder="Category"
           onChange={(e) => (props.application.category = e.target.value)}
         />
       );
@@ -166,10 +166,11 @@ const Detail = (props) => {
               ? 'ml-24 mt-16 h-80 bg-white'
               : 'ml-24 mt-16 h-80 bg-gray-400'
           }
-          placeholder="write some Memo"
           onChange={props.onChange}
           disabled={!edittingActivated}
-        />
+        >
+          {props.application.notes}
+        </textarea>
       </div>
     </div>
   );
