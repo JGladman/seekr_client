@@ -1,10 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FiEdit } from 'react-icons/fi';
 import { AiFillStar } from 'react-icons/ai';
 import '../../stylesheets/detail.css';
+import { updateApplication } from './ApplicationsSlice';
 
 const Detail = (props) => {
+  const dispatch = useDispatch();
+
   const [edittingActivated, setEdittingActivated] = useState(false);
+
+  const [category, setCategory] = useState(props.application.category);
+  const [interviewDate, setInterviewDate] = useState(
+    props.application.interviewDate,
+  );
+  const [priority, setPriority] = useState(props.application.priority);
+  const [notes, setNotes] = useState(props.application.notes);
+  const [applicationStep, setApplicationStep] = useState(
+    props.application.applicationStep,
+  );
+
   const [coloredStars, setColoredStars] = useState([
     props.application.priority >= 1,
     props.application.priority >= 2,
@@ -25,6 +40,7 @@ const Detail = (props) => {
     //
     //props.application.priority = selectedIndex + 1;
     setColoredStars(newColoredStars);
+    setPriority(selectedIndex + 1);
   };
 
   const [categoryComponent, setCategoryComponent] = useState(
@@ -37,6 +53,15 @@ const Detail = (props) => {
     props.application.interviewDate,
   );
 
+  const [stepString, setStepString] = useState(
+    props.applicationStepNumToStr[applicationStep],
+  );
+  const [stepElements, setStepElements] = useState(
+    <div className="my-16 text-center text-3xl">
+      Application Step: {stepString}
+    </div>,
+  );
+
   const toggleInfoEdit = () => {
     console.log('edittingActivated: ', edittingActivated);
     if (!edittingActivated) {
@@ -45,33 +70,23 @@ const Detail = (props) => {
           className="text-gray-600"
           type="text"
           placeholder="Category"
-          onChange={(e) => (props.application.category = e.target.value)}
+          onChange={(e) => setCategory(e.target.value)}
         />
       );
-
-      const dateAppliedEditMode = (
-        <input
-          className="text-gray-600"
-          type="date"
-          onChange={(e) => (props.application.dateApplied = e.target.value)}
-        />
-      );
-
       const InterviewDateEditMode = (
         <input
           className="text-gray-600"
           type="date"
-          onChange={(e) => (props.application.interviewDate = e.target.value)}
+          onChange={(e) => setInterviewDate(e.target.value)}
         />
       );
 
       setCategoryComponent(categroyEditMode);
-      setDateAppliedComponent(dateAppliedEditMode);
       setInterviewDateComponent(InterviewDateEditMode);
     } else {
-      setCategoryComponent(props.application.category);
+      setCategoryComponent(category);
       setDateAppliedComponent(props.application.dateApplied);
-      setInterviewDateComponent(props.application.interviewDate);
+      setInterviewDateComponent(interviewDate);
     }
   };
 
@@ -85,6 +100,38 @@ const Detail = (props) => {
           onClick={() => {
             toggleInfoEdit();
             setEdittingActivated(!edittingActivated);
+            if (!edittingActivated) {
+              setCategory('');
+              setStepElements(
+                <div className="my-16 text-center text-3xl">
+                  <button>{'<-'}</button>
+                  Application Step: {stepString}
+                  <button>{'->'}</button>
+                </div>,
+              );
+            } else {
+              setStepElements(
+                <div className="my-16 text-center text-3xl">
+                  Application Step: {stepString}
+                </div>,
+              );
+              const updated = {};
+              if (category) updated.category = category;
+              if (interviewDate) updated.interviewDate = interviewDate;
+              if (priority) updated.priority = priority;
+              if (notes) updated.notes = notes;
+              if (applicationStep >= 0)
+                updated.applicationStep = applicationStep;
+              console.log(updated);
+              dispatch(
+                updateApplication({
+                  updated: {
+                    category,
+                  },
+                  id: '600d3b35289d545e584d7b74',
+                }),
+              );
+            }
           }}
           style={{
             display: 'inline',
@@ -156,10 +203,7 @@ const Detail = (props) => {
             <li>Intervew Date: {interviewDateComponent}</li>
           </ul>
         </div>
-        <div className="my-16 text-center text-3xl">
-          Application Step:{' '}
-          {props.applicationStepNumToStr[props.application.applicationStep]}
-        </div>
+        {stepElements}
         <textarea
           style={{ width: '80%', color: 'black' }}
           className={
@@ -167,11 +211,10 @@ const Detail = (props) => {
               ? 'ml-24 mt-16 h-80 bg-white'
               : 'ml-24 mt-16 h-80 bg-gray-400'
           }
-          onChange={props.onChange}
+          onChange={(e) => setNotes(e.target.value)}
           disabled={!edittingActivated}
-        >
-          {props.application.notes}
-        </textarea>
+          value={notes}
+        ></textarea>
       </div>
     </div>
   );

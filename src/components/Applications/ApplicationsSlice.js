@@ -62,10 +62,10 @@ export const createApplication = createAsyncThunk(
 
 export const updateApplication = createAsyncThunk(
   'applications/updateApplication',
-  async (fields, id) => {
+  async ({ updated, id }) => {
     const response = await axios.put(
       `http://138.197.109.106:3001/applications/${id}`,
-      { ...fields },
+      { ...updated },
     );
     return response;
   },
