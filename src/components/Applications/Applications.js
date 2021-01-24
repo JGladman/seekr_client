@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { GrClose } from 'react-icons/gr';
 import Detail from './detail';
+import {SortContainer} from '../SortContainer/SortContainer';
+import {CreateApplicationForm} from '../CreateApplicationForm/CreateApplicationForm'
 import {
   deleteApplication,
   fetchApplications,
@@ -99,34 +101,15 @@ export function Applications() {
   });
 
   const sortBar = (
-    <div style = {{width: "300px", height: "500px"}} className = "border-4 border-gray-400 bg-green-300">
-      <h2 className = "p-3 text-3xl">Sort By</h2>
-      <ul className = "list-none cursor-pointer">
-        <li>Alphabetical</li>
-        <li>Category</li>
-        <li>Progress</li>
-      </ul>
+    <div className='items-stretch fixed bottom-60 right-0 h-96 w-96'>
+       <SortContainer/>
     </div>
+   
   )
 
   const applicationSidebar = (
-    <div style = {{width: "300px", height: "700"}} className = "border-4 border-gray-400 bg-green-300">
-      <h2 className = "p-3 text-3xl">Application</h2>
-      <ul className = "list-none cursor-pointer">
-        <li>Company Name <br/><input type = "text"/> </li>
-        <li>Job Title<br/><input type = "text"/> </li>
-        <li>Category <br/><input type = "text"/> </li>
-        <li>Application Step<br/>
-          <select name = "Application Steps">
-            <option value = "val1">val1</option>
-            <option value = "val2">val2</option>
-            <option value = "val3">val3</option>
-          </select> 
-        </li>
-        <li>Status <br/><input type = "text"/> </li>
-        <li>Date Applied <br/><input type = "text"/> </li>
-        <li>Notes <br/><input type = "text"/> </li>        
-      </ul>
+    <div className='fixed bottom-60 right-0 h-96 w-96'>
+      <CreateApplicationForm />
     </div>
   )
   
@@ -170,8 +153,8 @@ export function Applications() {
           </ClickAwayListener>
         </div>
         {/* <div> */}
-          <AiOutlineSortAscending onClick = {() => setSortSideBarDisplayed(!sortSideBarDisplayed)} className = "sticky h-10 w-10 right-0.5 cursor-pointer"/>
-          <IoMdAddCircle onClick = {() => setApplicationSideBarDisplayed(!applicationSideBarDisplayed)} className = "h-10 w-10 cursor-pointer"/>
+          <AiOutlineSortAscending onClick = {() => setSortSideBarDisplayed(!sortSideBarDisplayed)} className = "h-10 w-10 cursor-pointer fixed bottom-10 right-0"/>
+          <IoMdAddCircle onClick = {() => setApplicationSideBarDisplayed(!applicationSideBarDisplayed)} className = "h-10 w-10 cursor-pointer fixed bottom-0 right-0"/>
         {/* </div> */}
         <div>
             {sortSideBarDisplayed? sortBar: ""}

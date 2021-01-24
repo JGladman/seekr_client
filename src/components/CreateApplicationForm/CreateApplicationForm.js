@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { createApplication } from '../ApplicationsSlice';
+import { createApplication } from '../Applications/ApplicationsSlice';
 
 export const CreateApplicationForm = () => {
   const [companyName, setCompanyName] = useState('');
@@ -39,11 +39,13 @@ export const CreateApplicationForm = () => {
   };
 
   return (
+    <div >
     <section>
-      <h2>Add a New Application</h2>
-      <form>
-        <label htmlFor="companyName">Company Name:</label>
+      <h2 className='border-b-2 border-white py-1 px-1 text-center bg-gray-600 font-sans text-xl subpixel-antialiased font-bold text-gray-200'>Add a New Application</h2>
+      <form className='flex flex-col justify-evenly'>
+        <label className='py-1 px-1 text-left bg-gray-600 font-sans text-xl subpixel-antialiased font-bold text-gray-200' htmlFor="companyName">Company Name:</label>
         <input
+          className='border-8 border-gray-600 py-3 px-4 text-sm text-white bg-gray-900 focus:outline-none focus:bg-white focus:text-gray-900'
           type="text"
           id="companyName"
           name="companyName"
@@ -51,8 +53,9 @@ export const CreateApplicationForm = () => {
           value={companyName}
           onChange={onCompanyChanged}
         />
-        <label htmlFor="jobTitle">Job Title:</label>
+        <label className=' py-1 px-1 text-left bg-gray-600 font-sans text-xl subpixel-antialiased font-bold text-gray-200' htmlFor="jobTitle">Job Title:</label>
         <input
+          className='border-8 border-gray-600 py-3 px-4 text-sm text-white bg-gray-900 focus:outline-none focus:bg-white focus:text-gray-900'
           type="text"
           id="jobTitle"
           name="jobTitle"
@@ -60,8 +63,9 @@ export const CreateApplicationForm = () => {
           value={jobTitle}
           onChange={onJobChanged}
         />
-        <label htmlFor="category">Category:</label>
+        <label className='py-1 px-1 text-left bg-gray-600 font-sans text-xl subpixel-antialiased font-bold text-gray-200' htmlFor="category">Category:</label>
         <input
+          className='border-8 border-gray-600 py-3 px-4 text-sm text-white bg-gray-900 focus:outline-none focus:bg-white focus:text-gray-900'
           type="text"
           id="category"
           name="category"
@@ -69,15 +73,16 @@ export const CreateApplicationForm = () => {
           value={category}
           onChange={onCategoryChanged}
         />
-        <label htmlFor="priority">Priority:</label>
+        <label className=' py-1 px-1 text-left bg-gray-600 font-sans text-xl subpixel-antialiased font-bold text-gray-200' htmlFor="priority">Priority:</label>
         <input
+          className='border-8 border-gray-600 py-3 px-4 text-sm text-white bg-gray-900 focus:outline-none focus:bg-white focus:text-gray-900'
           type="number"
           id="priority"
           name="priority"
           value={priority}
           onChange={onPriorityChanged}
         />
-        <button
+        <button className=' py-1 px-1 text-center bg-green-600 hover:bg-red-400 font-sans text-xl subpixel-antialiased font-bold text-white'
           type="button"
           onClick={onSaveApplicationClicked}
           disabled={!canSave}
@@ -86,5 +91,7 @@ export const CreateApplicationForm = () => {
         </button>
       </form>
     </section>
+  </div>
+      
   );
 };

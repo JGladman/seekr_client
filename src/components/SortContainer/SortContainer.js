@@ -48,14 +48,13 @@ export const SortContainer = () => {
   }
 
   return (
-    <div>
-      <button onClick={sortedJobClick}>Job</button>
-      <button onClick={sortedCategoryClick}>Category</button>
-      <button onClick={sortedCompanyClick}>Company</button>
-      <button onClick={sortedPriorityClick}>Priority</button>
-      <button onClick={sortedStepClick}>Step</button>
-      <button onClick={fetchUnsorted}>Unsorted</button>
-      {content}
+    <div className='flex flex-col  justify-evenly '>
+      <button className='border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white' onClick={sortedJobClick}>Job</button>
+      <button className='border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white' onClick={sortedCategoryClick}>Category</button>
+      <button className='border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white' onClick={sortedCompanyClick}>Company</button>
+      <button className='border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white' onClick={sortedPriorityClick}>Priority</button>
+      <button className='border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white' onClick={sortedStepClick}>Step</button>
+      <button className='border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white' onClick={fetchUnsorted}>Date</button>
     </div>
   );
 };
