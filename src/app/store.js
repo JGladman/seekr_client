@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
-import jobReducer from "../features/JobInfo/jobsSlice";
+import applicationsReducer from '../components/Applications/ApplicationsSlice';
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
-    jobs: jobReducer
+    applications: applicationsReducer,
   },
 });
