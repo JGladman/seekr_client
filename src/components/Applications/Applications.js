@@ -117,12 +117,12 @@ export function Applications() {
   //   return (
   //     <div>
   //       <div
-  //         onClick={(e) => {
-  //           console.log(e.target);
-  //           if (detail !== '' && !e.target.dataset?.is_detail) {
-  //             setDetail('');
-  //           }
-  //         }}
+  // onClick={(e) => {
+  //   console.log(e.target);
+  //   if (detail !== '' && !e.target.dataset?.is_detail) {
+  //     setDetail('');
+  //   }
+  // }}
   //         className="mx-16 my-12 "
   //       >
   //         <div className="flex flex-wrap justify-evenly">
