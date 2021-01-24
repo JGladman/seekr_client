@@ -1,13 +1,16 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { applicationMenuClick } from '../SortContainer/SortWindows';
+import ContainersSlice from '../CotainersSlice';
+
 
 export const NewApplicationButton = (props) => {
-  const dispatch = useDispatch();
-
+  
+  const dispatch = useDispatch;
+  
   const applicationMenuClick = () => {
-    console.log('hey');
-    useDispatch(ContainersSlice('Application'));
+    // console.log('hey');
+    dispatch(ContainersSlice('Application'));
   };
 
   return (
