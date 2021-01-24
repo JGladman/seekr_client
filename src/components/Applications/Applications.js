@@ -8,11 +8,15 @@ import {
   selectAllApplications,
 } from './ApplicationsSlice';
 import ClickAwayListener from 'react-click-away-listener';
+import {IoMdAddCircle} from "react-icons/io";
+import {AiOutlineSortAscending} from "react-icons/ai";
 
 export function Applications() {
   const [detail, setDetail] = useState('');
   const [detailDisplayed, setDetailDisplayed] = useState(false);
   const [criteria, setCriteria] = useState('');
+  const [sortSideBarDisplayed, setSortSideBarDisplayed] = useState(false);
+  const [applicationSideBarDisplayed, setApplicationSideBarDisplayed] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -94,6 +98,39 @@ export function Applications() {
     );
   });
 
+  const sortBar = (
+    <div style = {{width: "300px", height: "500px"}} className = "border-4 border-gray-400 bg-green-300">
+      <h2 className = "p-3 text-3xl">Sort By</h2>
+      <ul className = "list-none cursor-pointer">
+        <li>Alphabetical</li>
+        <li>Category</li>
+        <li>Progress</li>
+      </ul>
+    </div>
+  )
+
+  const applicationSidebar = (
+    <div style = {{width: "300px", height: "700"}} className = "border-4 border-gray-400 bg-green-300">
+      <h2 className = "p-3 text-3xl">Application</h2>
+      <ul className = "list-none cursor-pointer">
+        <li>Company Name <br/><input type = "text"/> </li>
+        <li>Job Title<br/><input type = "text"/> </li>
+        <li>Category <br/><input type = "text"/> </li>
+        <li>Application Step<br/>
+          <select name = "Application Steps">
+            <option value = "val1">val1</option>
+            <option value = "val2">val2</option>
+            <option value = "val3">val3</option>
+          </select> 
+        </li>
+        <li>Status <br/><input type = "text"/> </li>
+        <li>Date Applied <br/><input type = "text"/> </li>
+        <li>Notes <br/><input type = "text"/> </li>        
+      </ul>
+    </div>
+  )
+  
+
   if (detailDisplayed) {
     return (
       <div>
@@ -131,6 +168,14 @@ export function Applications() {
             </div>
             {/* {detail} */}
           </ClickAwayListener>
+        </div>
+        {/* <div> */}
+          <AiOutlineSortAscending onClick = {() => setSortSideBarDisplayed(!sortSideBarDisplayed)} className = "sticky h-10 w-10 right-0.5 cursor-pointer"/>
+          <IoMdAddCircle onClick = {() => setApplicationSideBarDisplayed(!applicationSideBarDisplayed)} className = "h-10 w-10 cursor-pointer"/>
+        {/* </div> */}
+        <div>
+            {sortSideBarDisplayed? sortBar: ""}
+            {applicationSideBarDisplayed? applicationSidebar: ""}
         </div>
       </div>
     );
