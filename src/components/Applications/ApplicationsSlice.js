@@ -50,13 +50,34 @@ export const fetchApplications = createAsyncThunk(
 );
 
 export const createApplication = createAsyncThunk(
-  'posts/createNewApplication',
+  'applications/createNewApplication',
   async (newApplication) => {
     const response = await axios.post(
       'http://138.197.109.106:3001/applications',
       { ...newApplication },
     );
     return response.post;
+  },
+);
+
+export const updateApplication = createAsyncThunk(
+  'applications/updateApplication',
+  async (fields, id) => {
+    const response = await axios.put(
+      `http://138.197.109.106:3001/applications/${id}`,
+      { ...fields },
+    );
+    return response;
+  },
+);
+
+export const deleteApplication = createAsyncThunk(
+  'applications/deleteApplication',
+  async (id) => {
+    const response = await axios.delete(
+      `http://138.197.109.106:3001/applications/${id}`,
+    );
+    return response;
   },
 );
 

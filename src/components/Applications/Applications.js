@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { GrClose } from 'react-icons/gr';
 import Detail from './detail';
-import { fetchApplications, selectAllApplications } from './ApplicationsSlice';
+import {
+  deleteApplication,
+  fetchApplications,
+  selectAllApplications,
+} from './ApplicationsSlice';
 
 export function Applications() {
   const [detail, setDetail] = useState('');
+  const [criteria, setCriteria] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,6 +51,11 @@ export function Applications() {
       }
     };
 
+    const onClickDelete = async () => {
+      await dispatch(deleteApplication(app._id)).then();
+      dispatch(fetchApplications(criteria));
+    };
+
     return (
       <div
         onClick={expandCard}
@@ -55,7 +65,7 @@ export function Applications() {
         <div className="float-right">
           <GrClose
             data-deletepostcalled={true}
-            //TODO: Delete applications
+            onClick={onClickDelete}
             className="m-3 bg-gray-100"
           />
         </div>
@@ -80,23 +90,42 @@ export function Applications() {
     );
   });
 
-  return (
-    <div>
-      <div className="h-24 border-b-2">Header</div>
-      <div
-        onClick={(e) => {
-          console.log(e.target);
-          if (detail !== '' && !e.target.dataset?.is_detail) {
-            setDetail('');
-          }
-        }}
-        className="mx-16 my-12 "
-      >
-        <div className="flex flex-wrap justify-evenly">
-          {applicationsObjToJSX}
+  if (detail) {
+    return (
+      <div>
+        <div
+          onClick={(e) => {
+            console.log(e.target);
+            if (detail !== '' && !e.target.dataset?.is_detail) {
+              setDetail('');
+            }
+          }}
+          className="mx-16 my-12 "
+        >
+          {/* <div className="flex flex-wrap justify-evenly">
+            {applicationsObjToJSX}
+          </div> */}
+          {detail}
         </div>
-        {detail}
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div>
+        <div
+          onClick={(e) => {
+            console.log(e.target);
+            if (detail !== '' && !e.target.dataset?.is_detail) {
+              setDetail('');
+            }
+          }}
+          className="mx-16 my-12 "
+        >
+          <div className="flex flex-wrap justify-evenly">
+            {applicationsObjToJSX}
+          </div>
+        </div>
+      </div>
+    );
+  }
 }

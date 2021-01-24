@@ -35,7 +35,6 @@ const detail = (props) => {
       <textarea
         style={{ width: '80%', color: 'black' }}
         className="ml-24 mt-16 h-80 bg-white"
-        placeholder="write some Memo"
         //onChange={props.onChange}
       />
     </div>
