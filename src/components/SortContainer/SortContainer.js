@@ -5,6 +5,7 @@ import { fetchApplications, selectAllApplications } from '../ApplicationsSlice';
 
 export const SortContainer = () => {
   const dispatch = useDispatch();
+
   const applications = useSelector(selectAllApplications);
   const applicationsStatus = useSelector((state) => state.applications.status);
   const error = useSelector((state) => state.applications.error);

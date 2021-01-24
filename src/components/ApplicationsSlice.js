@@ -7,7 +7,6 @@ import axios from 'axios';
 
 const initialState = {
   applications: [],
-  uniqueIds: [],
   status: 'idle',
   error: null,
 };
@@ -45,8 +44,19 @@ export const fetchApplications = createAsyncThunk(
       // Unsorted
       default:
         response = await axios.get('http://138.197.109.106:3001/applications');
-        return response.data;
+        return response.data.reverse();
     }
+  },
+);
+
+export const createApplication = createAsyncThunk(
+  'posts/createNewApplication',
+  async (newApplication) => {
+    const response = await axios.post(
+      'http://138.197.109.106:3001/applications',
+      { ...newApplication },
+    );
+    return response.post;
   },
 );
 
@@ -66,6 +76,9 @@ const applicationsSlice = createSlice({
       state.status = 'failed';
       state.error = action.error.message;
     },
+    // [createApplication.fulfilled]: (state, action) => {
+    //   state.applications = state.applications.concat(action.payload);
+    // },
   },
 });
 
