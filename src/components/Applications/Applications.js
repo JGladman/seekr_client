@@ -94,45 +94,7 @@ export function Applications() {
     );
   });
 
-  // if (detail) {
-  //   return (
-  //     <div>
-  //       <div
-  //         onClick={(e) => {
-  //           console.log(e.target);
-  //           if (detail !== '' && !e.target.dataset?.is_detail) {
-  //             setDetail('');
-  //           }
-  //         }}
-  //         className="mx-16 my-12 "
-  //       >
-  //         {/* <div className="flex flex-wrap justify-evenly">
-  //           {applicationsObjToJSX}
-  //         </div> */}
-  //         {detail}
-  //       </div>
-  //     </div>
-  //   );
-  // } else {
-  //   return (
-  //     <div>
-  //       <div
-  // onClick={(e) => {
-  //   console.log(e.target);
-  //   if (detail !== '' && !e.target.dataset?.is_detail) {
-  //     setDetail('');
-  //   }
-  // }}
-  //         className="mx-16 my-12 "
-  //       >
-  //         <div className="flex flex-wrap justify-evenly">
-  //           {applicationsObjToJSX}
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-  if (detail) {
+  if (detailDisplayed) {
     return (
       <div>
         <div className="h-24 border-b-2">Header</div>
