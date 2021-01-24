@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { GrClose } from 'react-icons/gr';
 import Detail from './detail';
-import { selectAllApplications } from './ApplicationsSlice';
+import { fetchApplications, selectAllApplications } from './ApplicationsSlice';
 
 export function Applications() {
   const [detail, setDetail] = useState('');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchApplications());
+  }, []);
 
   const applications = useSelector(selectAllApplications);
 

@@ -1,9 +1,13 @@
 import React from 'react';
-import { Applications } from './components/Applications/Applications';
 import './stylesheets/App.css';
+import { Applications } from './components/Applications/Applications';
 
 function App() {
-  return <div>{Applications()}</div>;
+  return (
+    <div>
+      <Applications />
+    </div>
+  );
 }
 
 export default App;
