@@ -49,6 +49,7 @@ export function Applications() {
         data-is_detail={true}
         application={app}
         applicationStepNumToStr={applicationStepNumToStr}
+        bgColorWithApplicationStep = {bgColorWithApplicationStep}
       />
     );
 
@@ -87,8 +88,7 @@ export function Applications() {
             className={
               bgColorWithApplicationStep[app.applicationStep] +
               'w-full bg-opacity-30'
-            }
-          >
+            }>
             <div
               className={bgColorWithApplicationStep[app.applicationStep]}
             ></div>

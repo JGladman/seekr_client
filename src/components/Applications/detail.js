@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { AiFillStar } from 'react-icons/ai';
 import '../../stylesheets/detail.css';
+import {AiFillLeftCircle} from "react-icons/ai";
+import {AiFillRightCircle} from "react-icons/ai";
+import {AiFillStop} from "react-icons/ai";
+
 
 const Detail = (props) => {
   const [edittingActivated, setEdittingActivated] = useState(false);
@@ -12,6 +16,8 @@ const Detail = (props) => {
     props.application.priority >= 4,
     props.application.priority >= 5,
   ]);
+
+  const [applicationStep, setApplicationStep] = useState(props.application.applicationStep);
 
   const colorStars = (selectedIndex) => {
     //sth weird happens here. It seems counter intuitive but works correctly. Prob because of the timing of the update
@@ -74,6 +80,8 @@ const Detail = (props) => {
       setInterviewDateComponent(props.application.interviewDate);
     }
   };
+
+
 
   return (
     <div
@@ -156,9 +164,37 @@ const Detail = (props) => {
             <li>Intervew Date: {interviewDateComponent}</li>
           </ul>
         </div>
-        <div className="my-16 text-center text-3xl">
+        <div className=" text-center text-3xl">
           Application Step:{' '}
-          {props.applicationStepNumToStr[props.application.applicationStep]}
+          {props.applicationStepNumToStr[applicationStep]}
+          <div className="mt-28 mx-3">
+            <div
+              className={
+                props.bgColorWithApplicationStep[applicationStep] +
+                'w-full bg-opacity-30'
+              }>
+              <div
+                className={props.bgColorWithApplicationStep[applicationStep]}
+              ></div>
+            </div>
+          </div>
+          <div>
+             <AiFillLeftCircle onClick = {() => {
+               if (applicationStep > 0 && applicationStep <=3) {
+                 setApplicationStep(applicationStep - 1);
+               }
+             }} className = "inline cursor-pointer mx-1"/> 
+
+             <AiFillRightCircle onClick = {() => {
+               if (applicationStep < 3 && applicationStep >= 0) {
+                 setApplicationStep(1 + applicationStep);
+               }
+             }} className = "inline cursor-pointer mx-1"/> 
+            <br />
+             <AiFillStop 
+              onClick = {() => applicationStep === 4 ? setApplicationStep(0): setApplicationStep(4)} 
+              className = "inline cursor-pointer mx-1 text-red-500" />
+          </div>
         </div>
         <textarea
           style={{ width: '80%', color: 'black' }}
