@@ -94,7 +94,7 @@ const Detail = (props) => {
           className={edittingActivated ? 'text-purple-400' : ''}
         />
       </div>
-      <div className="px-28 pb-28">
+      <div className="px-28 pb-20">
         <div className="flex justify-between px-10">
           <div className="text-center">
             <div className="text-5xl">{props.application.companyName}</div>

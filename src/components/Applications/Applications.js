@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { GrClose } from 'react-icons/gr';
 import Detail from './detail';
 import { fetchApplications, selectAllApplications } from './ApplicationsSlice';
+import ClickAwayListener from "react-click-away-listener";
 
 export function Applications() {
   const [detail, setDetail] = useState('');
+  const [detailDisplayed, setDetailDisplayed] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,6 +44,7 @@ export function Applications() {
 
     const expandCard = (e) => {
       if (!e.target.dataset?.deletepostcalled) {
+        setDetailDisplayed(true);
         setDetail(detail);
       }
     };
@@ -83,20 +86,15 @@ export function Applications() {
   return (
     <div>
       <div className="h-24 border-b-2">Header</div>
-      <div
-        onClick={(e) => {
-          console.log(e.target);
-          if (detail !== '' && !e.target.dataset?.is_detail) {
-            setDetail('');
-          }
-        }}
-        className="mx-16 my-12 "
-      >
+      <div className="mx-16 my-12 ">
+        <ClickAwayListener onClickAway = {() => {if (detailDisplayed) {setDetailDisplayed(false)} }}>
         <div className="flex flex-wrap justify-evenly">
           {applicationsObjToJSX}
         </div>
-        {detail}
+        {detailDisplayed? detail: <div></div>}
+        </ClickAwayListener>
       </div>
+      
     </div>
   );
 }
