@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchApplications, selectAllApplications } from '../ApplicationsSlice';
+import {
+  fetchApplications,
+  selectAllApplications,
+} from '../Applications/ApplicationsSlice';
 
 export const SortContainer = () => {
   const dispatch = useDispatch();

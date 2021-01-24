@@ -1,15 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import {Jobs} from "./features/JobInfo/Jobs";
-import './App.css';
+import { Applications } from './components/Applications/Applications';
+import './stylesheets/App.css';
 
 function App() {
-  return (
-    <div>
-      {Jobs()}
-    </div>
-  );
+  return <div>{Applications()}</div>;
 }
 
 export default App;
