@@ -6,6 +6,8 @@ import { selectAllApplications } from './ApplicationsSlice';
 
 export function Applications() {
   const [detail, setDetail] = useState('');
+  const [detailDisplayed, setDetailDisplayed] = useState('');
+
 
   const applications = useSelector(selectAllApplications);
 
