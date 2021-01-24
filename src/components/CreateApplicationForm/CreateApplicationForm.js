@@ -45,7 +45,7 @@ export const CreateApplicationForm = () => {
       <form className='flex flex-col justify-evenly'>
         <label className='py-1 px-1 text-left bg-gray-600 font-sans text-xl subpixel-antialiased font-bold text-gray-200' htmlFor="companyName">Company Name:</label>
         <input
-          className='border-8 border-gray-600 py-3 px-4'
+          className='border-8 border-gray-600 py-3 px-4 text-sm text-white bg-gray-900 focus:outline-none focus:bg-white focus:text-gray-900'
           type="text"
           id="companyName"
           name="companyName"
@@ -55,7 +55,7 @@ export const CreateApplicationForm = () => {
         />
         <label className=' py-1 px-1 text-left bg-gray-600 font-sans text-xl subpixel-antialiased font-bold text-gray-200' htmlFor="jobTitle">Job Title:</label>
         <input
-          className='border-8 border-gray-600 py-3 px-4'
+          className='border-8 border-gray-600 py-3 px-4 text-sm text-white bg-gray-900 focus:outline-none focus:bg-white focus:text-gray-900'
           type="text"
           id="jobTitle"
           name="jobTitle"
@@ -65,7 +65,7 @@ export const CreateApplicationForm = () => {
         />
         <label className='py-1 px-1 text-left bg-gray-600 font-sans text-xl subpixel-antialiased font-bold text-gray-200' htmlFor="category">Category:</label>
         <input
-          className='border-8 border-gray-600 py-3 px-4'
+          className='border-8 border-gray-600 py-3 px-4 text-sm text-white bg-gray-900 focus:outline-none focus:bg-white focus:text-gray-900'
           type="text"
           id="category"
           name="category"
@@ -75,7 +75,7 @@ export const CreateApplicationForm = () => {
         />
         <label className=' py-1 px-1 text-left bg-gray-600 font-sans text-xl subpixel-antialiased font-bold text-gray-200' htmlFor="priority">Priority:</label>
         <input
-          className='border-8 border-gray-600 py-3 px-4'
+          className='border-8 border-gray-600 py-3 px-4 text-sm text-white bg-gray-900 focus:outline-none focus:bg-white focus:text-gray-900'
           type="number"
           id="priority"
           name="priority"

@@ -77,7 +77,7 @@ export function Applications() {
 
   return (
     <div>
-      <div className="h-24 border-b-2">Header</div>
+      <div className="h-24"></div>
       <div
         onClick={(e) => {
           console.log(e.target);
