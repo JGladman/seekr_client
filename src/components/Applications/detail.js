@@ -22,6 +22,7 @@ const Detail = (props) => {
     for (let j = 0; j <= selectedIndex; j++) {
       newColoredStars[j] = true;
     }
+    //
     //props.application.priority = selectedIndex + 1;
     setColoredStars(newColoredStars);
   };
