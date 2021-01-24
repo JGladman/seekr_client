@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-
-import applicationsReducer from '../components/ApplicationsSlice';
-
+import jobReducer from "../features/JobInfo/jobsSlice";
+    
 export default configureStore({
   reducer: {
+    jobs: jobReducer,
     applications: applicationsReducer,
   },
 });
