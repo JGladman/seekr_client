@@ -5,12 +5,13 @@ import {
 } from './jobsSlice';
 import {GrClose} from "react-icons/gr"
 import Detail from "../../components/detail"
+import ClickAwayListener from "react-click-away-listener";
 
 export function Jobs() {
-    const [priority, setPriorty] = useState("1");
-    const [detail, setDetail] = useState("");
+    const [detail, setDetail] = useState(<div></div>);
+    const [showingDetails, setShowingDetails] = useState(false);
 
-    const jobs = useSelector(selectJobs);
+    const  jobs = useSelector(selectJobs);
     const dispatch = useDispatch();
     console.log(jobs);
 
@@ -33,55 +34,20 @@ export function Jobs() {
 
     
 
-
     const jobsObjToJSX = jobs.map(job => {
         // setPriorty(job.priority);
 
-        const details2 = <Detail 
+        const details = <Detail 
             data-is_detail = {true} 
             job = {job} 
-            setPriority = {() => (e) => setPriorty(e.target.value)} 
-            priority = {priority}        
-            applicationStepNumToStr = {applicationStepNumToStr}/>
-
-        const details = <div data-is_detail = {true} style = {{width: "95%", height: "900px"}} 
-            className = "z-50 bg-gray-800 m-auto text-white p-28 sticky top-3 left-3 right-3 bottom-5">
-
-            <div className = "flex justify-between px-10">
-                <div className = "text-center">
-                    <div className = "text-5xl">{job.companyName}</div>
-                    <div className = "mt-5 text-2xl">{job.jobTitle}</div>
-                </div>
-                <ul className = "list-none text-lg">
-                    <li className = "items-center">
-                        Priority
-                        <input 
-                            onChange = {(e) => setPriorty(e.target.value)} 
-                            className = "mx-3" 
-                            type = "range" 
-                            min = "1" 
-                            max = "5" 
-                            value = {priority}/>
-                        {priority}
-                    </li>
-                    <li>Category: {job.category}</li>
-                    <li>Date Applied: {job.dateApplied}</li>
-                    <li>Intervew Date: {job.interviewDate}</li>
-                </ul>
-            </div>
-            <div className = "my-16 text-center text-3xl">Application Step: {applicationStepNumToStr[job.applicationStep]}</div>
-            <textarea 
-                style = {{width: "80%", color: 'black'}} 
-                className = "ml-24 mt-16 h-80 bg-white"
-                placeholder = "write some Memo"
-                onChange = {(e) => console.log(e.target.value)}
+            applicationStepNumToStr = {applicationStepNumToStr}
             />
-        </div>
-        
+
         const spreadOutDetails = (e) => {
             // console.dir(e.target);
             if (!e.target.dataset?.deletepostcalled){
-                setDetail(details2);
+                setShowingDetails(true);
+                setDetail(details);
             }     
         }
 
@@ -112,22 +78,33 @@ export function Jobs() {
       )
   })
 
+  let turnOffDetail = () => {
+      if (showingDetails) {
+          showingDetails = !showingDetails;
+          setDetail(<div></div>)
+      } 
+  }
+
+
 
   return (
     <div>
         <div className = "h-24 border-b-2">
             Header
         </div>
-        <div onClick = {(e) => {
-            console.log(e.target);
-            if (detail !== "" && !e.target.dataset?.is_detail){
-                setDetail("");
-            }
-        }} className = "mx-16 my-12 ">
+        <div className = "mx-16 my-12 ">
+        <ClickAwayListener 
+                onClickAway = {
+                    () => {
+                        if (showingDetails)
+                            setShowingDetails(false)}
+                }>
             <div className = "flex flex-wrap justify-evenly">
                 {jobsObjToJSX}
             </div>
-            {detail}
+           
+                {showingDetails? detail: <div></div>}
+            </ClickAwayListener>
         </div>
     </div>
   );
