@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { createApplication } from '../ApplicationsSlice';
+import { createApplication } from '../Applications/ApplicationsSlice';
 
 export const CreateApplicationForm = () => {
   const [companyName, setCompanyName] = useState('');
