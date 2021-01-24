@@ -18,5 +18,5 @@ const ContainersSlice = createSlice({
   },
 })
 
-export const { sortMenu, applicationMenu, closeMenu } = ContainersSlice.actions
-export default CountainersSlice.reducer
+export const { sortMenu, applicationMenu, closeMenu } = ContainersSlice.actions;
+export default ContainersSlice;

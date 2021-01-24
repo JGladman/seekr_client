@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ContainersSlice from '../CotainersSlice';
 
-import { ContainersSlice } from '../ContainersSlice';
-
-export const SortWindows = () => {
-  const sortMenuClick = () => {
-    dispatch(ContainersSlice('Sort'));
+//const dispatch = useDispatch();
+  // export const sortMenuClick = () => {
+  //   dispatch(ContainersSlice('Sort'));
+  // }
+export const applicationMenuClick = () => {
+    console.log("hey");
+    useDispatch(ContainersSlice('Application'));
   }
-  const applicationMenuClick = () => {
-    dispatch(ContainersSlice('Application'));
-  }
-  const closeMenuClick = () => {
-    dispatch(ContainersSlice(null));
-  } 
-}
+  // export const closeMenuClick = () => {
+  //   dispatch(ContainersSlice(null));
+  // } 
 
+
+  //e
