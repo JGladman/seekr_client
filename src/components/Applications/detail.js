@@ -97,8 +97,8 @@ const Detail = (props) => {
 
   return (
     <div
-      style={{ width: '85%', top: '0px' }}
-      className="z-50 bg-gray-800 m-auto text-white  sticky left-3 right-3 bottom-3"
+      style={{ width: '100%', top: '0px' }}
+      className="z-50 bg-gray-800    text-white  sticky left-3 right-3 bottom-3"
     >
       <div className="h-28 w-full flex justify-end px-14 py-10">
         <FiEdit
@@ -222,32 +222,38 @@ const Detail = (props) => {
             </div>
           </div>
           <div>
-            <AiFillLeftCircle
-              onClick={() => {
-                if (applicationStep > 0 && applicationStep <= 3) {
-                  setApplicationStep(applicationStep - 1);
-                }
-              }}
-              className="inline cursor-pointer mx-1"
-            />
+            {edittingActivated ? (
+              <div>
+                <AiFillLeftCircle
+                  onClick={() => {
+                    if (applicationStep > 0 && applicationStep <= 3) {
+                      setApplicationStep(applicationStep - 1);
+                    }
+                  }}
+                  className="inline cursor-pointer mx-1"
+                />
 
-            <AiFillRightCircle
-              onClick={() => {
-                if (applicationStep < 3 && applicationStep >= 0) {
-                  setApplicationStep(1 + applicationStep);
-                }
-              }}
-              className="inline cursor-pointer mx-1"
-            />
-            <br />
-            <AiFillStop
-              onClick={() =>
-                applicationStep === 4
-                  ? setApplicationStep(0)
-                  : setApplicationStep(4)
-              }
-              className="inline cursor-pointer mx-1 text-red-500"
-            />
+                <AiFillRightCircle
+                  onClick={() => {
+                    if (applicationStep < 3 && applicationStep >= 0) {
+                      setApplicationStep(1 + applicationStep);
+                    }
+                  }}
+                  className="inline cursor-pointer mx-1"
+                />
+                <br />
+                <AiFillStop
+                  onClick={() =>
+                    applicationStep === 4
+                      ? setApplicationStep(0)
+                      : setApplicationStep(4)
+                  }
+                  className="inline cursor-pointer mx-1 text-red-500"
+                />
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <textarea
