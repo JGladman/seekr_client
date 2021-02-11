@@ -2,27 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { GrClose } from 'react-icons/gr';
 import Detail from './detail';
+import { SortContainer } from '../SortContainer/SortContainer';
+import { CreateApplicationForm } from '../CreateApplicationForm/CreateApplicationForm';
 import {
   deleteApplication,
   fetchApplications,
   selectAllApplications,
 } from './ApplicationsSlice';
 import ClickAwayListener from 'react-click-away-listener';
-import {IoMdAddCircle} from "react-icons/io";
-import {AiOutlineSortAscending} from "react-icons/ai";
+import { IoMdAddCircle } from 'react-icons/io';
+import { AiOutlineSortAscending } from 'react-icons/ai';
 import { AiFillStar } from 'react-icons/ai';
 import '../../stylesheets/detail.css';
-
-
 
 export function Applications() {
   const [detail, setDetail] = useState('');
   const [detailDisplayed, setDetailDisplayed] = useState(false);
   const [criteria, setCriteria] = useState('');
   const [sortSideBarDisplayed, setSortSideBarDisplayed] = useState(false);
-  const [applicationSideBarDisplayed, setApplicationSideBarDisplayed] = useState(false);
-  const [coloredStars, setColoredStars] = useState([false, false,false, false, false]);
-
+  const [
+    applicationSideBarDisplayed,
+    setApplicationSideBarDisplayed,
+  ] = useState(false);
+  const [coloredStars, setColoredStars] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   const dispatch = useDispatch();
 
@@ -61,57 +69,57 @@ export function Applications() {
       setColoredStars(newColoredStars);
     };
 
-    const appColoredStars = [false,false,false,false,false];
-    for (let i = 0; i <= app.priority-1; i++){
+    const appColoredStars = [false, false, false, false, false];
+    for (let i = 0; i <= app.priority - 1; i++) {
       appColoredStars[i] = true;
     }
 
     // colorStars(3)
-    const starJSX = (  
+    const starJSX = (
       <ul
-      id="priorityRating"
-      className="inline flex flex-row list-none ml-2 justify-center"
-      style = {{margin: "0 auto"}}
-    >
-      <li
-        onClick={() => colorStars(0)}
-        className={appColoredStars[0] ? 'text-yellow-300' : ''}
+        id="priorityRating"
+        className="inline flex flex-row list-none ml-2 justify-center"
+        style={{ margin: '0 auto' }}
       >
-        <AiFillStar />
-      </li>
-      <li
-        onClick={() => colorStars(1)}
-        className={appColoredStars[1] ? 'text-yellow-300' : ''}
-      >
-        <AiFillStar />
-      </li>
-      <li
-        onClick={() => colorStars(2)}
-        className={appColoredStars[2] ? 'text-yellow-300' : ''}
-      >
-        <AiFillStar />
-      </li>
-      <li
-        onClick={() => colorStars(3)}
-        className={appColoredStars[3] ? 'text-yellow-300' : ''}
-      >
-        <AiFillStar />
-      </li>
-      <li
-        onClick={() => colorStars(4)}
-        className={appColoredStars[4] ? 'text-yellow-300' : ''}
-      >
-        <AiFillStar />
-      </li>
-    </ul>
+        <li
+          onClick={() => colorStars(0)}
+          className={appColoredStars[0] ? 'text-yellow-300' : ''}
+        >
+          <AiFillStar />
+        </li>
+        <li
+          onClick={() => colorStars(1)}
+          className={appColoredStars[1] ? 'text-yellow-300' : ''}
+        >
+          <AiFillStar />
+        </li>
+        <li
+          onClick={() => colorStars(2)}
+          className={appColoredStars[2] ? 'text-yellow-300' : ''}
+        >
+          <AiFillStar />
+        </li>
+        <li
+          onClick={() => colorStars(3)}
+          className={appColoredStars[3] ? 'text-yellow-300' : ''}
+        >
+          <AiFillStar />
+        </li>
+        <li
+          onClick={() => colorStars(4)}
+          className={appColoredStars[4] ? 'text-yellow-300' : ''}
+        >
+          <AiFillStar />
+        </li>
+      </ul>
     );
-   
+
     const detail = (
       <Detail
         data-is_detail={true}
         application={app}
         applicationStepNumToStr={applicationStepNumToStr}
-        bgColorWithApplicationStep = {bgColorWithApplicationStep}
+        bgColorWithApplicationStep={bgColorWithApplicationStep}
       />
     );
 
@@ -145,15 +153,14 @@ export function Applications() {
           <div className="text-center p-2 text-xl">{app.jobTitle}</div>
           <div className="text-center p-2 text-base">{app.category}</div>
         </div>
-        <div className="mt-12 mx-3 text-white">
-          {starJSX}
-        </div>
+        <div className="mt-12 mx-3 text-white">{starJSX}</div>
         <div className="mt-9 mx-3">
           <div
             className={
               bgColorWithApplicationStep[app.applicationStep] +
               'w-full bg-opacity-30'
-            }>
+            }
+          >
             <div
               className={bgColorWithApplicationStep[app.applicationStep]}
             ></div>
@@ -164,37 +171,16 @@ export function Applications() {
   });
 
   const sortBar = (
-    <div style = {{width: "300px", height: "500px"}} className = "border-4 border-gray-400 bg-green-300">
-      <h2 className = "p-3 text-3xl">Sort By</h2>
-      <ul className = "list-none cursor-pointer">
-        <li>Alphabetical</li>
-        <li>Category</li>
-        <li>Progress</li>
-      </ul>
+    <div className="items-stretch fixed bottom-60 right-0 h-96 w-96">
+      <SortContainer />
     </div>
-  )
+  );
 
   const applicationSidebar = (
-    <div style = {{width: "300px", height: "700"}} className = "border-4 border-gray-400 bg-green-300">
-      <h2 className = "p-3 text-3xl">Application</h2>
-      <ul className = "list-none cursor-pointer">
-        <li>Company Name <br/><input type = "text"/> </li>
-        <li>Job Title<br/><input type = "text"/> </li>
-        <li>Category <br/><input type = "text"/> </li>
-        <li>Application Step<br/>
-          <select name = "Application Steps">
-            <option value = "val1">val1</option>
-            <option value = "val2">val2</option>
-            <option value = "val3">val3</option>
-          </select> 
-        </li>
-        <li>Status <br/><input type = "text"/> </li>
-        <li>Date Applied <br/><input type = "text"/> </li>
-        <li>Notes <br/><input type = "text"/> </li>        
-      </ul>
+    <div className="fixed bottom-60 right-0 h-96 w-96">
+      <CreateApplicationForm />
     </div>
-  )
-  
+  );
 
   if (detailDisplayed) {
     return (
@@ -205,6 +191,7 @@ export function Applications() {
             onClickAway={() => {
               if (detailDisplayed) {
                 setDetailDisplayed(false);
+                dispatch(fetchApplications());
               }
             }}
           >
@@ -235,12 +222,27 @@ export function Applications() {
           </ClickAwayListener>
         </div>
         {/* <div> */}
-          <AiOutlineSortAscending onClick = {() => setSortSideBarDisplayed(!sortSideBarDisplayed)} className = "sticky h-10 w-10 right-0.5 cursor-pointer"/>
-          <IoMdAddCircle onClick = {() => setApplicationSideBarDisplayed(!applicationSideBarDisplayed)} className = "h-10 w-10 cursor-pointer"/>
+        <AiOutlineSortAscending
+          onClick={() => {
+            {
+              if (applicationSideBarDisplayed)
+                setApplicationSideBarDisplayed(false);
+              setSortSideBarDisplayed(!sortSideBarDisplayed);
+            }
+          }}
+          className="h-10 w-10 cursor-pointer fixed bottom-10 right-0"
+        />
+        <IoMdAddCircle
+          onClick={() => {
+            if (sortSideBarDisplayed) setSortSideBarDisplayed(false);
+            setApplicationSideBarDisplayed(!applicationSideBarDisplayed);
+          }}
+          className="h-10 w-10 cursor-pointer fixed bottom-0 right-0"
+        />
         {/* </div> */}
         <div>
-            {sortSideBarDisplayed? sortBar: ""}
-            {applicationSideBarDisplayed? applicationSidebar: ""}
+          {sortSideBarDisplayed ? sortBar : ''}
+          {applicationSideBarDisplayed ? applicationSidebar : ''}
         </div>
       </div>
     );

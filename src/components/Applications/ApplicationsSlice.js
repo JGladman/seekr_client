@@ -8,6 +8,7 @@ import axios from 'axios';
 const initialState = {
   applications: [],
   status: 'idle',
+  criteria: '',
   error: null,
 };
 
@@ -62,10 +63,10 @@ export const createApplication = createAsyncThunk(
 
 export const updateApplication = createAsyncThunk(
   'applications/updateApplication',
-  async (fields, id) => {
+  async ({ updated, id }) => {
     const response = await axios.put(
       `http://138.197.109.106:3001/applications/${id}`,
-      { ...fields },
+      { ...updated },
     );
     return response;
   },
@@ -84,7 +85,12 @@ export const deleteApplication = createAsyncThunk(
 const applicationsSlice = createSlice({
   name: 'applications',
   initialState,
-  reducers: {},
+  reducers: {
+    sorted(state, action) {
+      const { criteria } = action.payload;
+      state.criteria = criteria;
+    },
+  },
   extraReducers: {
     [fetchApplications.pending]: (state, action) => {
       state.status = 'loading';
@@ -111,3 +117,5 @@ export const selectApplicationById = (state, applicationId) =>
   state.applications.applications.find(
     (application) => application._id === applicationId,
   );
+
+export const selectCriteria = (state) => state.criteria;
