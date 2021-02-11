@@ -2,23 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { GrClose } from 'react-icons/gr';
 import Detail from './detail';
-import {SortContainer} from '../SortContainer/SortContainer';
-import {CreateApplicationForm} from '../CreateApplicationForm/CreateApplicationForm'
+import { SortContainer } from '../SortContainer/SortContainer';
+import { CreateApplicationForm } from '../CreateApplicationForm/CreateApplicationForm';
 import {
   deleteApplication,
   fetchApplications,
   selectAllApplications,
 } from './ApplicationsSlice';
 import ClickAwayListener from 'react-click-away-listener';
-import {IoMdAddCircle} from "react-icons/io";
-import {AiOutlineSortAscending} from "react-icons/ai";
+import { IoMdAddCircle } from 'react-icons/io';
+import { AiOutlineSortAscending } from 'react-icons/ai';
 
 export function Applications() {
   const [detail, setDetail] = useState('');
   const [detailDisplayed, setDetailDisplayed] = useState(false);
   const [criteria, setCriteria] = useState('');
   const [sortSideBarDisplayed, setSortSideBarDisplayed] = useState(false);
-  const [applicationSideBarDisplayed, setApplicationSideBarDisplayed] = useState(false);
+  const [
+    applicationSideBarDisplayed,
+    setApplicationSideBarDisplayed,
+  ] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -51,7 +54,7 @@ export function Applications() {
         data-is_detail={true}
         application={app}
         applicationStepNumToStr={applicationStepNumToStr}
-        bgColorWithApplicationStep = {bgColorWithApplicationStep}
+        bgColorWithApplicationStep={bgColorWithApplicationStep}
       />
     );
 
@@ -90,7 +93,8 @@ export function Applications() {
             className={
               bgColorWithApplicationStep[app.applicationStep] +
               'w-full bg-opacity-30'
-            }>
+            }
+          >
             <div
               className={bgColorWithApplicationStep[app.applicationStep]}
             ></div>
@@ -101,18 +105,16 @@ export function Applications() {
   });
 
   const sortBar = (
-    <div className='items-stretch fixed bottom-60 right-0 h-96 w-96'>
-       <SortContainer/>
+    <div className="items-stretch fixed bottom-60 right-0 h-96 w-96">
+      <SortContainer />
     </div>
-   
-  )
+  );
 
   const applicationSidebar = (
-    <div className='fixed bottom-60 right-0 h-96 w-96'>
+    <div className="fixed bottom-60 right-0 h-96 w-96">
       <CreateApplicationForm />
     </div>
-  )
-  
+  );
 
   if (detailDisplayed) {
     return (
@@ -123,6 +125,7 @@ export function Applications() {
             onClickAway={() => {
               if (detailDisplayed) {
                 setDetailDisplayed(false);
+                dispatch(fetchApplications());
               }
             }}
           >
@@ -153,12 +156,27 @@ export function Applications() {
           </ClickAwayListener>
         </div>
         {/* <div> */}
-          <AiOutlineSortAscending onClick = {() => setSortSideBarDisplayed(!sortSideBarDisplayed)} className = "h-10 w-10 cursor-pointer fixed bottom-10 right-0"/>
-          <IoMdAddCircle onClick = {() => setApplicationSideBarDisplayed(!applicationSideBarDisplayed)} className = "h-10 w-10 cursor-pointer fixed bottom-0 right-0"/>
+        <AiOutlineSortAscending
+          onClick={() => {
+            {
+              if (applicationSideBarDisplayed)
+                setApplicationSideBarDisplayed(false);
+              setSortSideBarDisplayed(!sortSideBarDisplayed);
+            }
+          }}
+          className="h-10 w-10 cursor-pointer fixed bottom-10 right-0"
+        />
+        <IoMdAddCircle
+          onClick={() => {
+            if (sortSideBarDisplayed) setSortSideBarDisplayed(false);
+            setApplicationSideBarDisplayed(!applicationSideBarDisplayed);
+          }}
+          className="h-10 w-10 cursor-pointer fixed bottom-0 right-0"
+        />
         {/* </div> */}
         <div>
-            {sortSideBarDisplayed? sortBar: ""}
-            {applicationSideBarDisplayed? applicationSidebar: ""}
+          {sortSideBarDisplayed ? sortBar : ''}
+          {applicationSideBarDisplayed ? applicationSidebar : ''}
         </div>
       </div>
     );

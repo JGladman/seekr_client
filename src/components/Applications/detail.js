@@ -7,7 +7,8 @@ import { AiFillLeftCircle } from 'react-icons/ai';
 import { AiFillRightCircle } from 'react-icons/ai';
 import { AiFillStop } from 'react-icons/ai';
 
-import { updateApplication } from './ApplicationsSlice';
+import { updateApplication, fetchApplications } from './ApplicationsSlice';
+import axios from 'axios';
 
 const Detail = (props) => {
   const dispatch = useDispatch();
@@ -101,7 +102,7 @@ const Detail = (props) => {
     >
       <div className="h-28 w-full flex justify-end px-14 py-10">
         <FiEdit
-          onClick={() => {
+          onClick={async () => {
             toggleInfoEdit();
             setEdittingActivated(!edittingActivated);
             if (!edittingActivated) {
@@ -119,22 +120,21 @@ const Detail = (props) => {
                   Application Step: {stepString}
                 </div>,
               );
-              const updated = {};
-              if (category) updated.category = category;
-              if (interviewDate) updated.interviewDate = interviewDate;
-              if (priority) updated.priority = priority;
-              if (notes) updated.notes = notes;
-              if (applicationStep >= 0)
-                updated.applicationStep = applicationStep;
-              console.log(updated);
-              dispatch(
-                updateApplication({
-                  updated: {
-                    category,
-                  },
-                  id: '600d3b35289d545e584d7b74',
-                }),
-              );
+              const url = `http://138.197.109.106:3001/applications/${props.application._id}`;
+              console.log(url);
+              await axios({
+                method: 'put',
+                url: url,
+                data: {
+                  jobTitle: props.application.jobTitle,
+                  category: category ? category : props.application.category,
+                  priority: priority ? priority : props.application.priority,
+                  applicationStep: applicationStep
+                    ? applicationStep
+                    : props.application.applicationStep,
+                  notes: notes ? notes : props.application.notes,
+                },
+              });
             }
           }}
           style={{

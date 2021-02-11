@@ -37,24 +37,44 @@ export const SortContainer = () => {
     dispatch(fetchApplications());
   };
 
-  let content;
-
-  if (applicationsStatus === 'loading') {
-    content = <div>Loading...</div>;
-  } else if (applicationsStatus === 'succeeded') {
-    content = applications.map((app) => <p key={app._id}>{app.companyName}</p>);
-  } else if (applicationsStatus === 'failed') {
-    content = <div>{error}</div>;
-  }
-
   return (
-    <div className='flex flex-col  justify-evenly '>
-      <button className='border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white' onClick={sortedJobClick}>Job</button>
-      <button className='border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white' onClick={sortedCategoryClick}>Category</button>
-      <button className='border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white' onClick={sortedCompanyClick}>Company</button>
-      <button className='border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white' onClick={sortedPriorityClick}>Priority</button>
-      <button className='border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white' onClick={sortedStepClick}>Step</button>
-      <button className='border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white' onClick={fetchUnsorted}>Date</button>
+    <div className="flex flex-col  justify-evenly ">
+      <button
+        className="border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white"
+        onClick={sortedJobClick}
+      >
+        Job
+      </button>
+      <button
+        className="border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white"
+        onClick={sortedCategoryClick}
+      >
+        Category
+      </button>
+      <button
+        className="border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white"
+        onClick={sortedCompanyClick}
+      >
+        Company
+      </button>
+      <button
+        className="border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white"
+        onClick={sortedPriorityClick}
+      >
+        Priority
+      </button>
+      <button
+        className="border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white"
+        onClick={sortedStepClick}
+      >
+        Step
+      </button>
+      <button
+        className="border py-5 px-4 text-left bg-gray-600 hover:bg-gray-400 font-sans text-5xl subpixel-antialiased font-bold text-white"
+        onClick={fetchUnsorted}
+      >
+        Date
+      </button>
     </div>
   );
 };
