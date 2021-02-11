@@ -12,6 +12,8 @@ import {
 import ClickAwayListener from 'react-click-away-listener';
 import { IoMdAddCircle } from 'react-icons/io';
 import { AiOutlineSortAscending } from 'react-icons/ai';
+import { AiFillStar } from 'react-icons/ai';
+import '../../stylesheets/detail.css';
 
 export function Applications() {
   const [detail, setDetail] = useState('');
@@ -22,6 +24,13 @@ export function Applications() {
     applicationSideBarDisplayed,
     setApplicationSideBarDisplayed,
   ] = useState(false);
+  const [coloredStars, setColoredStars] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   const dispatch = useDispatch();
 
@@ -49,6 +58,62 @@ export function Applications() {
   ];
 
   const applicationsObjToJSX = applications.map((app) => {
+    const colorStars = (ratings) => {
+      //sth weird happens here. It seems counter intuitive but works correctly. Prob because of the timing of the update
+      const newColoredStars = [false, false, false, false, false];
+      for (let j = 0; j <= ratings; j++) {
+        newColoredStars[j] = true;
+      }
+      //
+      //props.application.priority = selectedIndex + 1;
+      setColoredStars(newColoredStars);
+    };
+
+    const appColoredStars = [false, false, false, false, false];
+    for (let i = 0; i <= app.priority - 1; i++) {
+      appColoredStars[i] = true;
+    }
+
+    // colorStars(3)
+    const starJSX = (
+      <ul
+        id="priorityRating"
+        className="inline flex flex-row list-none ml-2 justify-center"
+        style={{ margin: '0 auto' }}
+      >
+        <li
+          onClick={() => colorStars(0)}
+          className={appColoredStars[0] ? 'text-yellow-300' : ''}
+        >
+          <AiFillStar />
+        </li>
+        <li
+          onClick={() => colorStars(1)}
+          className={appColoredStars[1] ? 'text-yellow-300' : ''}
+        >
+          <AiFillStar />
+        </li>
+        <li
+          onClick={() => colorStars(2)}
+          className={appColoredStars[2] ? 'text-yellow-300' : ''}
+        >
+          <AiFillStar />
+        </li>
+        <li
+          onClick={() => colorStars(3)}
+          className={appColoredStars[3] ? 'text-yellow-300' : ''}
+        >
+          <AiFillStar />
+        </li>
+        <li
+          onClick={() => colorStars(4)}
+          className={appColoredStars[4] ? 'text-yellow-300' : ''}
+        >
+          <AiFillStar />
+        </li>
+      </ul>
+    );
+
     const detail = (
       <Detail
         data-is_detail={true}
@@ -88,7 +153,8 @@ export function Applications() {
           <div className="text-center p-2 text-xl">{app.jobTitle}</div>
           <div className="text-center p-2 text-base">{app.category}</div>
         </div>
-        <div className="mt-28 mx-3">
+        <div className="mt-12 mx-3 text-white">{starJSX}</div>
+        <div className="mt-9 mx-3">
           <div
             className={
               bgColorWithApplicationStep[app.applicationStep] +
