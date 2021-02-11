@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { FiEdit } from 'react-icons/fi';
 import { AiFillStar } from 'react-icons/ai';
 import '../../stylesheets/detail.css';
