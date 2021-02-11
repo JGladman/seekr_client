@@ -1,5 +1,5 @@
-import React, { useState, useReducer } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { FiEdit } from 'react-icons/fi';
 import { AiFillStar } from 'react-icons/ai';
 import '../../stylesheets/detail.css';
@@ -7,12 +7,9 @@ import { AiFillLeftCircle } from 'react-icons/ai';
 import { AiFillRightCircle } from 'react-icons/ai';
 import { AiFillStop } from 'react-icons/ai';
 
-import { updateApplication, fetchApplications } from './ApplicationsSlice';
 import axios from 'axios';
 
 const Detail = (props) => {
-  const dispatch = useDispatch();
-
   const [edittingActivated, setEdittingActivated] = useState(false);
 
   const [category, setCategory] = useState(props.application.category);
@@ -58,10 +55,8 @@ const Detail = (props) => {
     props.application.interviewDate,
   );
 
-  const [stepString, setStepString] = useState(
-    props.applicationStepNumToStr[applicationStep],
-  );
-  const [stepElements, setStepElements] = useState(
+  const [stepString] = useState(props.applicationStepNumToStr[applicationStep]);
+  const [, setStepElements] = useState(
     <div className="my-16 text-center text-3xl">
       Application Step: {stepString}
     </div>,

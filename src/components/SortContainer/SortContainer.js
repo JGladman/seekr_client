@@ -1,17 +1,10 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import {
-  fetchApplications,
-  selectAllApplications,
-} from '../Applications/ApplicationsSlice';
+import { fetchApplications } from '../Applications/ApplicationsSlice';
 
 export const SortContainer = () => {
   const dispatch = useDispatch();
-
-  const applications = useSelector(selectAllApplications);
-  const applicationsStatus = useSelector((state) => state.applications.status);
-  const error = useSelector((state) => state.applications.error);
 
   const sortedJobClick = () => {
     dispatch(fetchApplications('job'));

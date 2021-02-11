@@ -18,24 +18,20 @@ import '../../stylesheets/detail.css';
 export function Applications() {
   const [detail, setDetail] = useState('');
   const [detailDisplayed, setDetailDisplayed] = useState(false);
-  const [criteria, setCriteria] = useState('');
+  // const [criteria, setCriteria] = useState('');
   const [sortSideBarDisplayed, setSortSideBarDisplayed] = useState(false);
   const [
     applicationSideBarDisplayed,
     setApplicationSideBarDisplayed,
   ] = useState(false);
-  const [coloredStars, setColoredStars] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [, setColoredStars] = useState([false, false, false, false, false]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     dispatch(fetchApplications());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const applications = useSelector(selectAllApplications);
@@ -132,7 +128,7 @@ export function Applications() {
 
     const onClickDelete = async () => {
       await dispatch(deleteApplication(app._id)).then();
-      dispatch(fetchApplications(criteria));
+      dispatch(fetchApplications());
     };
 
     return (
